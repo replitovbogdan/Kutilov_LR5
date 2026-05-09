@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roboflow + Replit Example</title>
+
+  <!-- ============================================= -->
+  <!-- БЛОК 1: ПОДКЛЮЧЕНИЕ ВНЕШНИХ БИБЛИОТЕК И СТИЛЕЙ -->
+  <!-- ============================================= -->
+  
+  <!-- Загрузка roboflow.js, скрипта, который будет обрабатывать загрузку и запуск нашей модели компьютерного зрения в браузере -->
+  <script src="https://cdn.jsdelivr.net/npm/inferencejs"></script>
+  
+  <link rel="stylesheet" href="/static/styles.css" />
+
+  <!-- ============================================= -->
+  <!-- БЛОК 2: КОНФИГУРАЦИЯ МОДЕЛИ ROBOFLOW         -->
+  <!-- ============================================= -->
+  <script>
+    // Замените ключ ниже на ваш публикуемый ключ Roboflow
+    var publishable_key = "rf_l8GLzZgLQL6gZLAin1iU";
+
+    // Измените эти значения, чтобы установить имя модели, версию и порог уверенности,
+    // который должен быть достигнут для возврата предсказания моделью.
+
+    // Рекомендуется устанавливать низкое значение CONFIDENCE_THRESHOLD при тестировании
+    // и фильтровать предсказания по уровню уверенности с помощью фильтра "Prediction Confidence %"
+
+    const CONFIDENCE_THRESHOLD = 0.1;
+    const MODEL_NAME = "microsoft-coco";
+    const MODEL_VERSION = 9;
+  </script>
+</head>
+
+<body>
+  <main>
+    <!-- ============================================= -->
+    <!-- БЛОК 3: ЗАГОЛОВОК И ОПИСАНИЕ ИНТЕРФЕЙСА      -->
+    <!-- ============================================= -->
+    <h1>Roboflow + Replit Web Example 🚀</h1>
+    <p>Roboflow позволяет создавать и запускать пользовательские модели компьютерного зрения в браузере, на устройстве (например, NVIDIA Jetson, Luxonis OAK, через Docker) и через API.</p>
+    <p>Пример ниже запускает <a href="https://universe.roboflow.com/jacob-solawetz/microsoft-coco">модель Microsoft COCO</a> для идентификации распространенных объектов, одну из 50 000 моделей с открытым исходным кодом, готовых к использованию на <a href="https://universe.roboflow.com">Roboflow Universe</a></p>
+    <p>С помощью демонстрации ниже вы можете идентифицировать <a href="https://universe.roboflow.com/jacob-solawetz/microsoft-coco">80 различных объектов</a> с помощью веб-камеры, от людей до стульев и чашек.</p>
+
+    <!-- Индикатор загрузки, отображается пока модель инициализируется -->
+    <p id="loading">Loading...</p>
+
+    <!-- ============================================= -->
+    <!-- БЛОК 4: ОБЛАСТЬ ДЛЯ ОТОБРАЖЕНИЯ РЕЗУЛЬТАТОВ   -->
+    <!-- ============================================= -->
+    <!-- Canvas ниже обязателен -->
+    <section class="infer-widget">
+      <canvas width="640" height="480" id="video_canvas"></canvas>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- БЛОК 5: ЭЛЕМЕНТЫ УПРАВЛЕНИЯ                  -->
+    <!-- ============================================= -->
+    <section id="settings">
+      <label for="confidence">Prediction Confidence %</label><br>
+      <input type="range" min="1" max="100" value="60" class="slider" id="confidence">
+    </section>
+
+    <!-- ============================================= -->
+    <!-- БЛОК 6: ССЫЛКИ НА РЕСУРСЫ                    -->
+    <!-- ============================================= -->
+    <section class="links">
+      <a href="https://blog.roboflow.com/getting-started-with-roboflow/" class="styled-button">Создать пользовательскую модель</a>
+      <a href="https://universe.roboflow.com" class="styled-button styled-button-turqouise">Изучить 50 000+ моделей и наборов данных</a>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- БЛОК 7: ПОДКЛЮЧЕНИЕ КЛИЕНТСКОЙ ЛОГИКИ        -->
+    <!-- ============================================= -->
+    <!-- Загружаем логику нашего приложения -->
+    <script src="/static/script.js"></script>
+  </main>
+</body>
+
+</html>
